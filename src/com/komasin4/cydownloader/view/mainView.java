@@ -46,15 +46,15 @@ public class mainView extends Application {
 	//public static final String accept_language = "ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4";
 	public static final DateFormat df = new SimpleDateFormat("yyyyMMdd");
 	public static final String url = "http://cyxso.cyworld.com/Login.sk?loginsrc=redirect&redirection%3Dhttp%3A%2F%2Fclub.cyworld.com%2Fclub%2Fclubsection2%2Fhome.asp";
-	
+
 	private static final boolean bTest = true;
 
 	Pane root = new Pane();
 	Scene scene = new Scene(root);
 	TextArea descField = new TextArea();
-	Button buttonGetPhoto = new Button("»çÁø °¡Á®¿À±â");
-	Button buttonRetry = new Button("´Ù½Ã ·Î±×ÀÎ");
-	Button buttonTest = new Button("Å×½ºÆ®");
+	Button buttonGetPhoto = new Button("ì‚¬ì§„ ê°€ì ¸ì˜¤ê¸°");
+	Button buttonRetry = new Button("ë‹¤ì‹œ ë¡œê·¸ì¸");
+	Button buttonTest = new Button("í…ŒìŠ¤íŠ¸");
 	WebView browser = new WebView();
 	WebEngine webEngine = browser.getEngine();
 
@@ -82,7 +82,7 @@ public class mainView extends Application {
 		browser.setPrefWidth(970);
 
 		root.getChildren().addAll(buttonGetPhoto, buttonRetry, browser, descField);
-		
+
 		stage.setTitle("JavaFX WebView (o7planning.org)");
 		stage.setScene(scene);
 		stage.setWidth(1024);
@@ -91,9 +91,9 @@ public class mainView extends Application {
 		stage.show();
 
 		webEngine.load(url);
-		descField.appendText("·Î±×ÀÎÈÄ ºó È­¸éÀÌ ³ªÅ¸³ª¸é ¿À¸¥ÂÊÀÇ '»çÁø °¡Á®¿À±â' ¹öÆ° Å¬¸¯\n");
+		descField.appendText("ë¡œê·¸ì¸í›„ ë¹ˆ í™”ë©´ì´ ë‚˜íƒ€ë‚˜ë©´ ì˜¤ë¥¸ìª½ì˜ 'ì‚¬ì§„ ê°€ì ¸ì˜¤ê¸°' ë²„íŠ¼ í´ë¦­\n");
 
-		//»çÁø°¡Á®¿À±â ¹öÆ° ÀÌº¥Æ® Ã³¸®
+		//ì‚¬ì§„ê°€ì ¸ì˜¤ê¸° ë²„íŠ¼ ì´ë²¤íŠ¸ ì²˜ë¦¬
 		buttonGetPhoto.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -104,7 +104,7 @@ public class mainView extends Application {
 			}
 		});
 
-		//´Ù½Ã·Î±×ÀÎ ¹öÆ° ÀÌº¥Æ® Ã³¸®
+		//ë‹¤ì‹œë¡œê·¸ì¸ ë²„íŠ¼ ì´ë²¤íŠ¸ ì²˜ë¦¬
 		buttonRetry.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -112,7 +112,7 @@ public class mainView extends Application {
 				descField.setPrefHeight(55);
 				//browser.setVisible(true);
 				webEngine.load(url);
-				descField.setText("·Î±×ÀÎÈÄ ºó È­¸éÀÌ ³ªÅ¸³ª¸é ¿À¸¥ÂÊÀÇ '»çÁø °¡Á®¿À±â' ¹öÆ° Å¬¸¯\n");
+				descField.setText("ë¡œê·¸ì¸í›„ ë¹ˆ í™”ë©´ì´ ë‚˜íƒ€ë‚˜ë©´ ì˜¤ë¥¸ìª½ì˜ 'ì‚¬ì§„ ê°€ì ¸ì˜¤ê¸°' ë²„íŠ¼ í´ë¦­\n");
 			}
 		});
 
@@ -125,7 +125,7 @@ public class mainView extends Application {
 				startGetPhotoTest(manager);
 			}
 		});
-		
+
 		descField.textProperty().addListener( new ChangeListener <String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -161,17 +161,17 @@ public class mainView extends Application {
 
 	}
 
-	public void runGetPhoto(CookieManager manager) 
+	public void runGetPhoto(CookieManager manager)
 	{
 
 		Map<String,String> loginCookie = new HashMap<String,String>();
 		String tid = new String();
 		CyScrapping cyScrapping = new CyScrapping();
 
-		DescFieldUtil.AppendString(descField, "ÄíÅ° ÃßÃâÁß...");
+		DescFieldUtil.AppendString(descField, "ì¿ í‚¤ ì¶”ì¶œì¤‘...");
 
 		try	{
-			//ÄíÅ° °¡Á®¿À±â
+			//ì¿ í‚¤ ê°€ì ¸ì˜¤ê¸°
 			CookieHandler cookieHandler = manager.getDefault();
 			Map<String, List<String>> tempMap = cookieHandler.get(URI.create(url), new HashMap<String, List<String>>());
 			List<String> cookieList = tempMap.get("Cookie");
@@ -181,36 +181,36 @@ public class mainView extends Application {
 
 			for(String a : cookieStringList) {
 				String[] t = a.split("=");
-				loginCookie.put(t.length < 1?"":t[0].trim(),  
+				loginCookie.put(t.length < 1?"":t[0].trim(),
 						t.length < 2?"":t[1].trim());
 			}
 
 
 			if(loginCookie.get("CFN") == null || loginCookie.get("CFN").isEmpty())	{
-				DescFieldUtil.AppendString(descField, "ÄíÅ°°¡ ¾ø½À´Ï´Ù.");
-				DescFieldUtil.AppendString(descField, "'´Ù½Ã ·Î±×ÀÎ' ¹öÆ°À» ´©¸¥ÈÄ ·Î±×ÀÎ È­¸é¿¡¼­ ´Ù½Ã ·Î±×ÀÎÀ» ½Ãµµ ÇÏ¼¼¿ä.");
+				DescFieldUtil.AppendString(descField, "ì¿ í‚¤ê°€ ì—†ìŠµë‹ˆë‹¤.");
+				DescFieldUtil.AppendString(descField, "'ë‹¤ì‹œ ë¡œê·¸ì¸' ë²„íŠ¼ì„ ëˆ„ë¥¸í›„ ë¡œê·¸ì¸ í™”ë©´ì—ì„œ ë‹¤ì‹œ ë¡œê·¸ì¸ì„ ì‹œë„ í•˜ì„¸ìš”.");
 				return;
 			} else {
 				DescFieldUtil.AppendString(descField, "CFN cookie:" + loginCookie.get("CFN").substring(1,50) + "....");
 			}
 
-			//tid °¡Á®¿À±â
-			DescFieldUtil.AppendString(descField, "user key °¡Á® ¿À´Â Áß....");
+			//tid ê°€ì ¸ì˜¤ê¸°
+			DescFieldUtil.AppendString(descField, "user key ê°€ì ¸ ì˜¤ëŠ” ì¤‘....");
 
 			tid = cyScrapping.getTid(loginCookie);
 
 			DescFieldUtil.AppendString(descField, "userkey:" + tid);
 
 			if(tid == null || tid.isEmpty())	{
-				DescFieldUtil.AppendString(descField, "userkey¸¦ ¾Ë ¼ö ¾ø¾î »çÁøÀ» °¡Á®¿Ã ¼ö ¾ø½À´Ï´Ù.");
+				DescFieldUtil.AppendString(descField, "userkeyë¥¼ ì•Œ ìˆ˜ ì—†ì–´ ì‚¬ì§„ì„ ê°€ì ¸ì˜¬ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 				return;
 			}
 
-			DescFieldUtil.AppendString(descField, "Æú´õ ¸®½ºÆ®¸¦ °¡Á®¿À´Â Áß....");
+			DescFieldUtil.AppendString(descField, "í´ë” ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜¤ëŠ” ì¤‘....");
 
 
-			List<Folder> folderList = new ArrayList<Folder> (); 
-			List<Post> postListAll = new ArrayList<Post> (); 
+			List<Folder> folderList = new ArrayList<Folder> ();
+			List<Post> postListAll = new ArrayList<Post> ();
 
 			try {
 				//folderList = getFolderList(loginCookie, tid);
@@ -222,30 +222,30 @@ public class mainView extends Application {
 				}
 				 */
 
-				DescFieldUtil.AppendString(descField, "ÃÑ " + folderList.size() + "°³ÀÇ Æú´õ°¡ ÀÖ½À´Ï´Ù.");
+				DescFieldUtil.AppendString(descField, "ì´ " + folderList.size() + "ê°œì˜ í´ë”ê°€ ìˆìŠµë‹ˆë‹¤.");
 
 			} catch (Exception e)	{
-				DescFieldUtil.AppendString(descField, e.getMessage() + "\n" + "Æú´õ ¸ñ·ÏÀ» °¡Á®¿À´Â Áß ¿À·ù°¡ ¹ß»ıÇÏ¿© »çÁøÀ» °¡Á®¿Ã ¼ö ¾ø½À´Ï´Ù.");
+				DescFieldUtil.AppendString(descField, e.getMessage() + "\n" + "í´ë” ëª©ë¡ì„ ê°€ì ¸ì˜¤ëŠ” ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì—¬ ì‚¬ì§„ì„ ê°€ì ¸ì˜¬ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 				return;
 			}
 
 			if(folderList == null || folderList.size() < 1)	{
-				DescFieldUtil.AppendString(descField, "»çÁøÆú´õ°¡ ¾ø½À´Ï´Ù.");
+				DescFieldUtil.AppendString(descField, "ì‚¬ì§„í´ë”ê°€ ì—†ìŠµë‹ˆë‹¤.");
 				return;
 			}
 
-			DescFieldUtil.AppendString(descField, "Æ÷½ºÆ® ¸ñ·ÏÀ» °¡Á®¿É´Ï´Ù....");
-			
+			DescFieldUtil.AppendString(descField, "í¬ìŠ¤íŠ¸ ëª©ë¡ì„ ê°€ì ¸ì˜µë‹ˆë‹¤....");
+
 			for(Folder folder:folderList)	{
-				
+
 				String folderName = folder.getDepth1Name() + "/" + folder.getDepth2Name() + "/" + folder.getName();
-				DescFieldUtil.AppendString(descField, folderName + " Æú´õ Ã³¸®Áß.");
+				DescFieldUtil.AppendString(descField, folderName + " í´ë” ì²˜ë¦¬ì¤‘.");
 
 				int page = 1;
-				
+
 				List<Post> postList = cyScrapping.getPostListPageOne(loginCookie, tid, folder, descField);
 
-				//DescFieldUtil.AppendString(descField, folderName + " Æú´õÀÇ  Æ÷½ºÆ® ¸ñ·ÏÀ» °¡Á®¿É´Ï´Ù.(page-" + page + ")");
+				//DescFieldUtil.AppendString(descField, folderName + " í´ë”ì˜  í¬ìŠ¤íŠ¸ ëª©ë¡ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.(page-" + page + ")");
 
 				try {
 					/*
@@ -256,13 +256,13 @@ public class mainView extends Application {
 					 */
 
 					if(postList == null || postList.size() < 1)	{
-						DescFieldUtil.AppendString(descField, " - Æ÷½ºÆ®°¡ ¾ø½À´Ï´Ù.");
+						DescFieldUtil.AppendString(descField, " - í¬ìŠ¤íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
 						continue;
 					}
-					
+
 					postListAll.addAll(postList);
 
-					DescFieldUtil.AppendString(descField, "\n" + folder.getName() + "Æú´õ:" + page + " ÆäÀÌÁö Ã³¸® ¿Ï·á");
+					DescFieldUtil.AppendString(descField, "\n" + folder.getName() + "í´ë”:" + page + " í˜ì´ì§€ ì²˜ë¦¬ ì™„ë£Œ");
 
 					Post lastPost_before = postList.get(postList.size() - 1);
 					Post lastPost = null;
@@ -286,33 +286,33 @@ public class mainView extends Application {
 
 							lastPost = postList.get(postList.size() - 1);
 						} catch (Exception e)	{
-							//descField.appendText(e.getMessage() + "\n Æ÷½ºÆ® ¸ñ·Ï Ã³¸®Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.(3)+(" + i + ")\n");
-							//System.out.println("error:" + e.getMessage() + "\n Æ÷½ºÆ® ¸ñ·Ï Ã³¸®Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.(3)+(" + i + ")\n");
-							DescFieldUtil.AppendString(descField, e.getMessage() + "\n" + folderName + " Æú´õÀÇ °Ô½Ã¹° ¸ñ·ÏÀ» °¡Á®¿À´Â Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.(2)");
+							//descField.appendText(e.getMessage() + "\n í¬ìŠ¤íŠ¸ ëª©ë¡ ì²˜ë¦¬ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.(3)+(" + i + ")\n");
+							//System.out.println("error:" + e.getMessage() + "\n í¬ìŠ¤íŠ¸ ëª©ë¡ ì²˜ë¦¬ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.(3)+(" + i + ")\n");
+							DescFieldUtil.AppendString(descField, e.getMessage() + "\n" + folderName + " í´ë”ì˜ ê²Œì‹œë¬¼ ëª©ë¡ì„ ê°€ì ¸ì˜¤ëŠ” ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.(2)");
 						}
 						page++;
-						DescFieldUtil.AppendString(descField, "\n" + folder.getName() + "Æú´õ:" + page + " ÆäÀÌÁö Ã³¸® ¿Ï·á");
+						DescFieldUtil.AppendString(descField, "\n" + folder.getName() + "í´ë”:" + page + " í˜ì´ì§€ ì²˜ë¦¬ ì™„ë£Œ");
 						//DescFieldUtil.AppendString(descField, ", " + page, page%30==0?true:false);
 					}
 
 				} catch (Exception e) {
 					e.printStackTrace();
-					DescFieldUtil.AppendString(descField, e.getMessage() + "\n" + folderName + " Æú´õÀÇ °Ô½Ã¹° ¸ñ·ÏÀ» °¡Á®¿À´Â Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.(1)");
+					DescFieldUtil.AppendString(descField, e.getMessage() + "\n" + folderName + " í´ë”ì˜ ê²Œì‹œë¬¼ ëª©ë¡ì„ ê°€ì ¸ì˜¤ëŠ” ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.(1)");
 				}
 
 				folder.setPostCount(postList.size());
-				DescFieldUtil.AppendString(descField, "\n " + postList.size() + "°³ÀÇ Æ÷½ºÆ® Ã³¸® ¿Ï·á.");
+				DescFieldUtil.AppendString(descField, "\n " + postList.size() + "ê°œì˜ í¬ìŠ¤íŠ¸ ì²˜ë¦¬ ì™„ë£Œ.");
 			}
-			
-			DescFieldUtil.AppendString(descField, "\nÀüÃ¼ Æ÷½ºÆ® " + postListAll.size() + "°³ Ã³¸® ¿Ï·á.");
-			
+
+			DescFieldUtil.AppendString(descField, "\nì „ì²´ í¬ìŠ¤íŠ¸ " + postListAll.size() + "ê°œ ì²˜ë¦¬ ì™„ë£Œ.");
+
 		} catch (Exception e)	{
-			DescFieldUtil.AppendString(descField, "¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
+			DescFieldUtil.AppendString(descField, "ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		}
-		
+
 		//
 
-		DescFieldUtil.AppendString(descField, "Ã³¸®°¡ ¿Ï·á µÇ¾ú½À´Ï´Ù.");
+		DescFieldUtil.AppendString(descField, "ì²˜ë¦¬ê°€ ì™„ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 		/*
     	for(int i = 0 ; i < 1000 ; i++)	{
@@ -328,19 +328,19 @@ public class mainView extends Application {
     	}
 		 */
 
-		/*    	
-        for(int i = 1; i <= 10; i++) 
+		/*
+        for(int i = 1; i <= 10; i++)
         {
             try
             {
                 // Get the Status
                 final String status = "Processing " + i + " of " + 10;
 
-                // Update the Label on the JavaFx Application Thread        
-                Platform.runLater(new Runnable() 
+                // Update the Label on the JavaFx Application Thread
+                Platform.runLater(new Runnable()
                 {
                     @Override
-                    public void run() 
+                    public void run()
                     {
                         statusLabel.setText(status);
                     }
@@ -350,15 +350,15 @@ public class mainView extends Application {
 
                 Thread.sleep(1000);
             }
-            catch (InterruptedException e) 
+            catch (InterruptedException e)
             {
                 e.printStackTrace();
             }
         }
 		 */
 	}
-	
-	
+
+
 	public void startGetPhotoTest(CookieManager manager) {
 
 		Runnable task = new Runnable()
@@ -378,18 +378,18 @@ public class mainView extends Application {
 		backgroundThread.start();
 
 	}
-	
-	public void runGetPhotoTest(CookieManager manager) 
+
+	public void runGetPhotoTest(CookieManager manager)
 	{
 
 		Map<String,String> loginCookie = new HashMap<String,String>();
 		String tid = new String();
 		CyScrapping cyScrapping = new CyScrapping();
 
-		DescFieldUtil.AppendString(descField, "ÄíÅ° ÃßÃâÁß...");
+		DescFieldUtil.AppendString(descField, "ì¿ í‚¤ ì¶”ì¶œì¤‘...");
 
 		try	{
-			//ÄíÅ° °¡Á®¿À±â
+			//ì¿ í‚¤ ê°€ì ¸ì˜¤ê¸°
 			CookieHandler cookieHandler = manager.getDefault();
 			Map<String, List<String>> tempMap = cookieHandler.get(URI.create(url), new HashMap<String, List<String>>());
 			List<String> cookieList = tempMap.get("Cookie");
@@ -399,43 +399,43 @@ public class mainView extends Application {
 
 			for(String a : cookieStringList) {
 				String[] t = a.split("=");
-				loginCookie.put(t.length < 1?"":t[0].trim(),  
+				loginCookie.put(t.length < 1?"":t[0].trim(),
 						t.length < 2?"":t[1].trim());
 			}
 
 
 			if(loginCookie.get("CFN") == null || loginCookie.get("CFN").isEmpty())	{
-				DescFieldUtil.AppendString(descField, "ÄíÅ°°¡ ¾ø½À´Ï´Ù.");
-				DescFieldUtil.AppendString(descField, "'´Ù½Ã ·Î±×ÀÎ' ¹öÆ°À» ´©¸¥ÈÄ ·Î±×ÀÎ È­¸é¿¡¼­ ´Ù½Ã ·Î±×ÀÎÀ» ½Ãµµ ÇÏ¼¼¿ä.");
+				DescFieldUtil.AppendString(descField, "ì¿ í‚¤ê°€ ì—†ìŠµë‹ˆë‹¤.");
+				DescFieldUtil.AppendString(descField, "'ë‹¤ì‹œ ë¡œê·¸ì¸' ë²„íŠ¼ì„ ëˆ„ë¥¸í›„ ë¡œê·¸ì¸ í™”ë©´ì—ì„œ ë‹¤ì‹œ ë¡œê·¸ì¸ì„ ì‹œë„ í•˜ì„¸ìš”.");
 				return;
 			} else {
 				DescFieldUtil.AppendString(descField, "CFN cookie:" + loginCookie.get("CFN").substring(1,50) + "....");
 			}
 
-			//tid °¡Á®¿À±â
-			DescFieldUtil.AppendString(descField, "user key °¡Á® ¿À´Â Áß....");
+			//tid ê°€ì ¸ì˜¤ê¸°
+			DescFieldUtil.AppendString(descField, "user key ê°€ì ¸ ì˜¤ëŠ” ì¤‘....");
 
 			tid = cyScrapping.getTid(loginCookie);
 
 			DescFieldUtil.AppendString(descField, "userkey:" + tid);
 
 			if(tid == null || tid.isEmpty())	{
-				DescFieldUtil.AppendString(descField, "userkey¸¦ ¾Ë ¼ö ¾ø¾î »çÁøÀ» °¡Á®¿Ã ¼ö ¾ø½À´Ï´Ù.");
+				DescFieldUtil.AppendString(descField, "userkeyë¥¼ ì•Œ ìˆ˜ ì—†ì–´ ì‚¬ì§„ì„ ê°€ì ¸ì˜¬ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 				return;
 			}
-			
-			//Æ¯Á¤ Æ÷½ºÆ®ÀÇ ÀÌ¹ÌÁö ¸®½ºÆ®
+
+			//íŠ¹ì • í¬ìŠ¤íŠ¸ì˜ ì´ë¯¸ì§€ ë¦¬ìŠ¤íŠ¸
 			//https://cy.cyworld.com/home/12669268/post/4299EC282E800182A2A86401/layer
 			Post postTemp = new Post();
-			
-			postTemp.setId("4299EC282E800182A2A86401");
-			
-			cyScrapping.makePost("12669268", loginCookie, postTemp);
-			
 
-		DescFieldUtil.AppendString(descField, "Ã³¸®°¡ ¿Ï·á µÇ¾ú½À´Ï´Ù.");
+			postTemp.setId("4299EC282E800182A2A86401");
+
+			cyScrapping.makePost("12669268", loginCookie, postTemp);
+
+
+		DescFieldUtil.AppendString(descField, "ì²˜ë¦¬ê°€ ì™„ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤.");
 		} catch (Exception e)	{
-			
+
 		}
 
 	}

@@ -46,10 +46,10 @@ public class CyScrapping extends Common {
 				.header("Content-Type", content_type)
 				.header("Accept-Encoding", accept_encoding)
 				.header("Accept-Language", accept_language)
-				.cookies(loginCookie) // À§¿¡¼­ ¾òÀº '·Î±×ÀÎ µÈ' ÄíÅ°
+				.cookies(loginCookie) // ìœ„ì—ì„œ ì–»ì€ 'ë¡œê·¸ì¸ ëœ' ì¿ í‚¤
 				.get();
 
-		//html¿¡¼­ tid ÃßÃâ
+		//htmlì—ì„œ tid ì¶”ì¶œ
 		//String tid = null;
 		for(Element el:cyMain.select("script[type]"))	{
 			String unescapedHtml = el.data();
@@ -68,35 +68,35 @@ public class CyScrapping extends Common {
 	/*
 	public void getScrappingStart(Map<String,String> loginCookie, String tid, TextArea descField)	{
 
-		descField.appendText("\nÆú´õ ¸®½ºÆ®¸¦ °¡Á®¿À´Â Áß....\n");
+		descField.appendText("\ní´ë” ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜¤ëŠ” ì¤‘....\n");
 
-		List<Folder> folderList = new ArrayList<Folder> (); 
+		List<Folder> folderList = new ArrayList<Folder> ();
 
 		try {
 			folderList = getFolderList(loginCookie, tid, descField);
 
-			descField.appendText("ÃÑ " + folderList.size() + "°³ÀÇ Æú´õ°¡ ÀÖ½À´Ï´Ù.\n");
+			descField.appendText("ì´ " + folderList.size() + "ê°œì˜ í´ë”ê°€ ìˆìŠµë‹ˆë‹¤.\n");
 
 		} catch (Exception e)	{
-			descField.appendText(e.getMessage() + "\n" + "Æú´õ ¸ñ·ÏÀ» °¡Á®¿À´Â Áß ¿À·ù°¡ ¹ß»ıÇÏ¿© »çÁøÀ» °¡Á®¿Ã ¼ö ¾ø½À´Ï´Ù.\n");
+			descField.appendText(e.getMessage() + "\n" + "í´ë” ëª©ë¡ì„ ê°€ì ¸ì˜¤ëŠ” ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì—¬ ì‚¬ì§„ì„ ê°€ì ¸ì˜¬ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
 			return;
 		}
 
 		if(folderList == null || folderList.size() < 1)	{
-			descField.appendText("»çÁøÆú´õ°¡ ¾ø½À´Ï´Ù.\n");
+			descField.appendText("ì‚¬ì§„í´ë”ê°€ ì—†ìŠµë‹ˆë‹¤.\n");
 			return;
 		}
 
-		descField.appendText("\n»çÁøÀ» °¡Á®¿É´Ï´Ù....\n");
+		descField.appendText("\nì‚¬ì§„ì„ ê°€ì ¸ì˜µë‹ˆë‹¤....\n");
 
 		for(Folder folder:folderList)	{
 			String folderName = folder.getDepth1Name() + "/" + folder.getDepth2Name() + "/" + folder.getName();
-			descField.appendText("\n" + folderName + " Æú´õÀÇ »çÁøÀ» °¡Á®¿É´Ï´Ù.\n");
+			descField.appendText("\n" + folderName + " í´ë”ì˜ ì‚¬ì§„ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.\n");
 
 			try {
 				getPhoto(loginCookie, tid, folder, descField);
 			} catch (Exception e) {
-				descField.appendText(e.getMessage() + "\n" + folderName + " Æú´õÀÇ »çÁøÀ» °¡Á®¿À´Â Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.\n");
+				descField.appendText(e.getMessage() + "\n" + folderName + " í´ë”ì˜ ì‚¬ì§„ì„ ê°€ì ¸ì˜¤ëŠ” ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.\n");
 			}
 		}
 
@@ -109,7 +109,7 @@ public class CyScrapping extends Common {
 	public List<Folder> getFolderList(Map<String,String> loginCookie, String tid, TextArea descField) throws Exception	{
 
 
-		//JOptionPane.showMessageDialog(null, "Æú´õ¸®½ºÆ®°¡Á®¿À±â");
+		//JOptionPane.showMessageDialog(null, "í´ë”ë¦¬ìŠ¤íŠ¸ê°€ì ¸ì˜¤ê¸°");
 
 		List<Folder> folderList = new ArrayList<Folder>();
 
@@ -121,7 +121,7 @@ public class CyScrapping extends Common {
 				.header("Content-Type", content_type)
 				.header("Accept-Encoding", accept_encoding)
 				.header("Accept-Language", accept_language)
-				.cookies(loginCookie) // À§¿¡¼­ ¾òÀº '·Î±×ÀÎ µÈ' ÄíÅ°
+				.cookies(loginCookie) // ìœ„ì—ì„œ ì–»ì€ 'ë¡œê·¸ì¸ ëœ' ì¿ í‚¤
 				.ignoreHttpErrors(true).validateTLSCertificates(false).followRedirects(true)
 				.get();
 
@@ -154,8 +154,8 @@ public class CyScrapping extends Common {
 	}
 
 	//	public void getPhoto(Map<String,String> loginCookie, String tid, Folder folder, TextArea descField)	{
-	public List<Post> getPostListPageOne(Map<String,String> loginCookie, String tid, Folder folder, TextArea descField) throws Exception	{		
-		//Post ¸ñ·Ï ÃßÃâ
+	public List<Post> getPostListPageOne(Map<String,String> loginCookie, String tid, Folder folder, TextArea descField) throws Exception	{
+		//Post ëª©ë¡ ì¶”ì¶œ
 		List<Post> postList = new ArrayList<Post>();
 
 		Document posts = Jsoup.connect("http://cy.cyworld.com/home/" + tid + "/postlist?folderid=" + folder.getId() + "&listsize=10")
@@ -165,7 +165,7 @@ public class CyScrapping extends Common {
 				.header("Content-Type", content_type)
 				.header("Accept-Encoding", accept_encoding)
 				.header("Accept-Language", accept_language)
-				.cookies(loginCookie) // À§¿¡¼­ ¾òÀº '·Î±×ÀÎ µÈ' ÄíÅ°
+				.cookies(loginCookie) // ìœ„ì—ì„œ ì–»ì€ 'ë¡œê·¸ì¸ ëœ' ì¿ í‚¤
 				.ignoreHttpErrors(true).validateTLSCertificates(false).followRedirects(true)
 				.get();
 
@@ -191,7 +191,7 @@ public class CyScrapping extends Common {
 
 			//DescFieldUtil.AppendString(descField, "getPostListPageOne:" + post.getYyyymmdd() + ":" + post.getTitle());
 
-			//»çÁø°¡Á®¿À±â
+			//ì‚¬ì§„ê°€ì ¸ì˜¤ê¸°
 			getImageFromPost(tid, loginCookie, folder, post, descField);
 
 		}
@@ -217,13 +217,13 @@ public class CyScrapping extends Common {
 
 				lastPost = postList.get(postList.size() - 1);
 				} catch (Exception e)	{
-					//descField.appendText(e.getMessage() + "\n Æ÷½ºÆ® ¸ñ·Ï Ã³¸®Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.(3)+(" + i + ")\n");
-					//System.out.println("error:" + e.getMessage() + "\n Æ÷½ºÆ® ¸ñ·Ï Ã³¸®Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.(3)+(" + i + ")\n");
+					//descField.appendText(e.getMessage() + "\n í¬ìŠ¤íŠ¸ ëª©ë¡ ì²˜ë¦¬ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.(3)+(" + i + ")\n");
+					//System.out.println("error:" + e.getMessage() + "\n í¬ìŠ¤íŠ¸ ëª©ë¡ ì²˜ë¦¬ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.(3)+(" + i + ")\n");
 				}
 			}
 		 */
 
-		//descField.appendText(folder.getName() + ":" + postList.size() + "°³ÀÇ Æ÷½ºÆ®°¡ ÀÖ½À´Ï´Ù.\n");
+		//descField.appendText(folder.getName() + ":" + postList.size() + "ê°œì˜ í¬ìŠ¤íŠ¸ê°€ ìˆìŠµë‹ˆë‹¤.\n");
 
 		return postList;
 	}
@@ -241,7 +241,7 @@ public class CyScrapping extends Common {
 					.header("Content-Type", content_type)
 					.header("Accept-Encoding", accept_encoding)
 					.header("Accept-Language", accept_language)
-					.cookies(loginCookie) // À§¿¡¼­ ¾òÀº '·Î±×ÀÎ µÈ' ÄíÅ°
+					.cookies(loginCookie) // ìœ„ì—ì„œ ì–»ì€ 'ë¡œê·¸ì¸ ëœ' ì¿ í‚¤
 					.ignoreHttpErrors(true).validateTLSCertificates(false).followRedirects(true)
 					.get();
 
@@ -268,19 +268,19 @@ public class CyScrapping extends Common {
 					//post.setImgs(getImageFromPost(tid, loginCookie, post));
 					postList.add(post);
 
-					//»çÁø°¡Á®¿À±â
+					//ì‚¬ì§„ê°€ì ¸ì˜¤ê¸°
 					getImageFromPost(tid, loginCookie, folder, post, descField);
 
 					//DescFieldUtil.AppendString(descField, "getMorePostList:" + post.getYyyymmdd() + ":" + post.getTitle());
 
 				} catch (Exception e)	{
-					//descField.appendText(e.getMessage() + "\n Æ÷½ºÆ® ¸ñ·Ï Ã³¸®Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.(2-2)\n");
+					//descField.appendText(e.getMessage() + "\n í¬ìŠ¤íŠ¸ ëª©ë¡ ì²˜ë¦¬ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.(2-2)\n");
 				}
 			}
 
 
 		} catch (Exception e)	{
-			//descField.appendText(e.getMessage() + "\n Æ÷½ºÆ® ¸ñ·Ï Ã³¸®Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.(2-1)\n");
+			//descField.appendText(e.getMessage() + "\n í¬ìŠ¤íŠ¸ ëª©ë¡ ì²˜ë¦¬ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.(2-1)\n");
 		}
 
 
@@ -292,7 +292,7 @@ public class CyScrapping extends Common {
 
 		try {
 
-			//DescFieldUtil.AppendString(descField, "ÀÌ¹ÌÁö ¸ñ·Ï °¡Á®¿À´ÂÁß...");
+			//DescFieldUtil.AppendString(descField, "ì´ë¯¸ì§€ ëª©ë¡ ê°€ì ¸ì˜¤ëŠ”ì¤‘...");
 
 			Document postDoc = Jsoup.connect("http://cy.cyworld.com/home/" + tid + "/post/" + post.getId())
 					.userAgent(userAgent)
@@ -301,12 +301,12 @@ public class CyScrapping extends Common {
 					.header("Content-Type", content_type)
 					.header("Accept-Encoding", accept_encoding)
 					.header("Accept-Language", accept_language)
-					.cookies(loginCookie) // À§¿¡¼­ ¾òÀº '·Î±×ÀÎ µÈ' ÄíÅ°
+					.cookies(loginCookie) // ìœ„ì—ì„œ ì–»ì€ 'ë¡œê·¸ì¸ ëœ' ì¿ í‚¤
 					.ignoreHttpErrors(true).validateTLSCertificates(false).followRedirects(true)
 					.get();
 
 			//Element postEl = postDoc.getElementById("postData");
-			//ÀÌ¹ÌÁö
+			//ì´ë¯¸ì§€
 			Elements imgBoxEls = postDoc.getElementsByClass("post imageBox cyco-imagelet");
 
 			for(Element tmpEl:imgBoxEls)	{
@@ -365,8 +365,8 @@ public class CyScrapping extends Common {
 
 			}
 
-			//ÇØ´ç Æ÷½ºÆ®ÀÇ ÀÌ¹ÌÁö °¡Á®¿À±â
-			DescFieldUtil.AppendString(descField,  "\n»çÁø´Ù¿î·Îµå:" + post.getTitle() + ":" + imgList.size());
+			//í•´ë‹¹ í¬ìŠ¤íŠ¸ì˜ ì´ë¯¸ì§€ ê°€ì ¸ì˜¤ê¸°
+			DescFieldUtil.AppendString(descField,  "\nì‚¬ì§„ë‹¤ìš´ë¡œë“œ:" + post.getTitle() + ":" + imgList.size());
 			int imgCnt = 0;
 			for(String img:imgList)	{
 				System.out.println(imgList.get(imgCnt++));
@@ -381,9 +381,9 @@ public class CyScrapping extends Common {
 					e.printStackTrace();
 				}
 			}
-			//DescFieldUtil.AppendString(descField,  post.getTitle() + ":" + imgCnt + "°³ ÀÌ¹ÌÁö ´Ù¿î·Îµå");
+			//DescFieldUtil.AppendString(descField,  post.getTitle() + ":" + imgCnt + "ê°œ ì´ë¯¸ì§€ ë‹¤ìš´ë¡œë“œ");
 
-			//0.1ÃÊ ½¬±â (Æ÷½ºÆ® ÇÏ³ª´ç)
+			//0.1ì´ˆ ì‰¬ê¸° (í¬ìŠ¤íŠ¸ í•˜ë‚˜ë‹¹)
 			Thread.sleep(100);
 
 		} catch (Exception e)	{
@@ -409,7 +409,7 @@ public class CyScrapping extends Common {
 					fileName = path.substring(path.lastIndexOf("%2F") + 4);
 			} else if(url.indexOf("c2down.cyworld.co.kr") > -1)	{
 				fileName = url.substring(url.indexOf("&name=") + 6);
-			}	
+			}
 			fileName = URLDecoder.decode(fileName, "UTF-8");
 		} catch (Exception e)	{
 		}
@@ -442,7 +442,7 @@ public class CyScrapping extends Common {
 					.header("Content-Type", content_type)
 					.header("Accept-Encoding", accept_encoding)
 					.header("Accept-Language", accept_language)
-					.cookies(loginCookie) // À§¿¡¼­ ¾òÀº '·Î±×ÀÎ µÈ' ÄíÅ°
+					.cookies(loginCookie) // ìœ„ì—ì„œ ì–»ì€ 'ë¡œê·¸ì¸ ëœ' ì¿ í‚¤
 					.ignoreHttpErrors(true).validateTLSCertificates(false).followRedirects(true)
 					.get();
 

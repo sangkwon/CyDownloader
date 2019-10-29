@@ -20,15 +20,15 @@ public class StringUtil {
 
 		return value;
 	}
-	
+
 	public static String convertFilename(String orgnStr) {
 	    String restrictChars = "|\\\\?*<\":>/";
 	    String regExpr = "[" + restrictChars + "]+";
 
-	    // ÆÄÀÏ¸íÀ¸·Î »ç¿ë ºÒ°¡´ÉÇÑ Æ¯¼ö¹®ÀÚ Á¦°Å
+	    // íŒŒì¼ëª…ìœ¼ë¡œ ì‚¬ìš© ë¶ˆê°€ëŠ¥í•œ íŠ¹ìˆ˜ë¬¸ì ì œê±°
 	    String tmpStr = orgnStr.replaceAll(regExpr, "");
 
-	    // °ø¹é¹®ÀÚ "_"·Î Ä¡È¯
+	    // ê³µë°±ë¬¸ì "_"ë¡œ ì¹˜í™˜
 	    return tmpStr.replaceAll("[ ]", "_");
 	}
 }
