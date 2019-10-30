@@ -356,7 +356,7 @@ public class CyScrapping extends Common {
 			if(imgList == null || imgList.size() < 1)
 				return imgList;
 			else	{
-				path = "/cyimg_download/" + StringUtil.convertFilename(folder.getDepth1Name()) + "/" + StringUtil.convertFilename(folder.getDepth2Name()) + "/" + StringUtil.convertFilename(folder.getName());
+				path = "./cyimg_download/" + StringUtil.convertFilename(folder.getDepth1Name()) + "/" + StringUtil.convertFilename(folder.getDepth2Name()) + "/" + StringUtil.convertFilename(folder.getName());
 				filePrefix = path +  "/" + post.getYyyymmdd() + "_" + StringUtil.convertFilename(post.getTitle()) + "_";
 
 				File f = new File(path);
